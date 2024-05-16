@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+<div class="body-container">
+    <div class="header-product">
+        <h4 class="left">List of Products</h4>
+        <button type="button" (click)="openModal()" class="btn-add-product">Add
+            Product</button>
+    </div>
+    <div class="table-responsive-xxl pb-5 mx-3 d-flex justify-content-center">
+        <table class="table table-bordered table-hover bdr w-full">
+            <thead class="table-dark align-middle text-center">
+                <tr>
+                    <th scope="col" class="col-1">
+                        Handle
+                    </th>
+                    <th scope="col" class="col-1">
+                        Title
+                    </th>
+                    <th scope="col" class="col-3">
+                        Description
+                    </th>
+                    <th scope="col" class="col-1">
+                        SKU
+                    </th>
+                    <th scope="col" class="col-1">
+                        Grams
+                    </th>
+                    <th scope="col" class="col-1">
+                        Stock
+                    </th>
+                    <th scope="col" class="col-1">
+                        Price
+                    </th>
+                    <th scope="col" class="col-1">
+                        Compare Price
+                    </th>
+                    <th scope="col" class="col-1">
+                        Barcode
+                    </th>
+                    <th scope="col" class="col-2">
+                        <span class="head-edit">Actions</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listProduct; let i = index" class="body">
+                    <th scope="row" class="first-item">
+                        {{item.handle}}
+                    </th>
+                    <td>
+                        {{item.title}}
+                    </td>
+                    <td>
+                        <div [innerHtml]="item.description"></div>
+                    </td>
+                    <td>
+                        {{item.sku}}
+                    </td>
+                    <td>
+                        {{item.grams}}
+                    </td>
+                    <td>
+                        {{item.stock}}
+                    </td>
+                    <td>
+                        {{item.price}}
+                    </td>
+                    <td>
+                        {{item.compare_price}}
+                    </td>
+                    <td>
+                        {{item.barcode}}
+                    </td>
+                    <td class="cell-right d-flex justify-content-around">
+                        <button type="button" (click)="item.id && loadProduct(item)" class="btn btn-warning"><i
+                                class="bi bi-pencil-fill"></i></button>
+                        <button type="button" (click)="item.id && deleteProduct(item.id)" class="btn btn-danger"><i
+                                class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Agregar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-product-form (onCloseModal)="closeModal()" [data]="product"></app-product-form>
+            </div>
+        </div>
+    </div>
+</div>
